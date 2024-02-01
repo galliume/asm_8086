@@ -1,16 +1,20 @@
-#include <limits.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <errno.h>
 #include <stdint.h>
 
 #include "defines.h"
 
 int main(int argc, char** argv)
 {
+
+  if (argc < 2) 
+  {
+    printf("Needs a filename");
+    return -1;
+  }
+
   u64 size = 0;
-  char const * file_name = "./listing_37.bin";
+  char * file_name = argv[1];
 
   FILE* fp = fopen(file_name, "rb");
 
@@ -21,9 +25,11 @@ int main(int argc, char** argv)
     return -1;
   }
 
+  printf("Decoding %s \n", file_name);
   printf("%s", "16 bits \n");
 
   uint8_t data;
+
   while (fread(&data, sizeof(uint8_t), 1, fp))
   {
     if (data >> 2 == 0b100010) //mov instruction
@@ -31,7 +37,7 @@ int main(int argc, char** argv)
       uint8_t dBit = data >> 1 & 1;
       uint8_t wBit = data & 1;
 
-      printf("%s %d/%d", "mov", dBit, wBit);
+      //printf("%s %d/%d", "mov", dBit, wBit);
 
       fread(&data, sizeof(uint8_t), 1, fp);
 
@@ -39,7 +45,7 @@ int main(int argc, char** argv)
       uint8_t reg = data >> 3 & 0b111;
       uint8_t rm = data & 0b111;
 
-      printf("\t %d/%d/%d \n", mod, reg, rm);
+      //printf("\t %d/%d/%d \n", mod, reg, rm);
 
       uint8_t source, dest;
 
@@ -62,9 +68,12 @@ int main(int argc, char** argv)
       {
         printf("mov %s, %s", lregistersName[dest], lregistersName[source]);
       }
+      printf("\n");
     }
   }
   fclose(fp);
+
+  printf("\n\n");
 
   return 0;
 }

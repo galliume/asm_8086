@@ -29,23 +29,23 @@ enum xregisters : u8
 };
 
 char * lregistersName[8] = {
-  "AL",
-  "CL",
-  "DL",
-  "BL",
-  "AH",
-  "CH",
-  "DH",
-  "BH"
+  "al",
+  "cl",
+  "dl",
+  "bl",
+  "ah",
+  "ch",
+  "dh",
+  "bh"
 };
 
 char * xregistersName[8] = {
-  "AX",
-  "CX",
-  "DX",
-  "BX",
-  "SP",
-  "BP",
-  "SI",
-  "DI"  
+  "ax",
+  "cx",
+  "dx",
+  "bx",
+  "sp",
+  "bp",
+  "si",
+  "di"  
 };

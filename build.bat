@@ -5,5 +5,7 @@
 clang -D _CRT_SECURE_NO_WARNINGS chipset.c -o chipset.exe
 
 pushd .
-chipset.exe
+chipset.exe listing_37.bin
+
+chipset.exe listing_38.bin
 popd
